@@ -1,0 +1,22 @@
+{
+  "name": "anonymous-cv",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An anonymized CV rendered from JSON and React to standalone HTML.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "preview": "node scripts/preview.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

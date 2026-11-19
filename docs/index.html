@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="ru"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="color-scheme" content="light"/><meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; style-src &#x27;unsafe-inline&#x27;; script-src &#x27;unsafe-inline&#x27;; img-src data:; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;"/><meta name="description" content="Анонимизированное резюме: системная архитектура, full-stack разработка, платёжные интеграции и AI engineering."/><meta name="referrer" content="no-referrer"/><title>Мария — System Architect &amp; Full-stack Engineer</title><style>@charset "UTF-8";
+:root {
+  --canvas:#eeede8;
+  --paper:#fffefa;
+  --ink:#252f2e;
+  --soft:#596361;
+  --faint:#77817d;
+  --line:#dedfd8;
+  --accent:#a34f36;
+  --accent-wash:#f3e9df;
+  --green:#366653;
+  --sans:"Segoe UI",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font: 15px/1.75 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+::selection {
+  background: #edd7c7;
+  color: #2c332b;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+.skip-link {
+  position: absolute;
+  left: 24px;
+  top: -70px;
+  background: var(--ink);
+  color: white;
+  padding: 10px 18px;
+  z-index: 30;
+}
+.skip-link:focus {
+  top: 12px;
+}
+.page-shell {
+  width: min(1240px, 100% - 80px);
+  margin: 30px auto;
+  background: var(--paper);
+  border: 1px solid #dfdfd6;
+  padding: 0 64px;
+  box-shadow: 0 8px 50px #363a2c05;
+}
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 23px 0;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  font-family: var(--serif);
+  font-size: 29px;
+  line-height: 1;
+  font-weight: bold;
+}
+.wordmark-dot {
+  color: var(--accent);
+}
+.edition {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.print-button {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: var(--soft);
+  padding: 8px 0;
+}
+.print-button:hover {
+  color: var(--accent);
+}
+.print-button > span:last-child {
+  font-size: 19px;
+  line-height: 1;
+}
+.enhanced-control {
+  display: none;
+}
+.js .enhanced-control {
+  display: flex;
+}
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 47px 0 45px;
+  border-bottom: 1px solid var(--line);
+}
+.eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(68px, 8.5vw, 102px);
+  font-weight: normal;
+  line-height: 1.16;
+  letter-spacing: -5px;
+  margin: 9px 0 7px;
+}
+.hero-period {
+  color: var(--accent);
+}
+.role {
+  font-size: 17px;
+  letter-spacing: -.2px;
+  line-height: 1.6;
+}
+.hero-note {
+  align-self: flex-end;
+  padding-bottom: 4px;
+  text-align: right;
+}
+.draft-mark {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  background: #eaf0e7;
+  color: var(--green);
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+.draft-mark > span {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.hero-note p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--soft);
+}
+.workspace {
+  display: grid;
+  grid-template-columns: 169px minmax(0, 1fr);
+  gap: 43px;
+  padding-top: 36px;
+}
+.navigation {
+  align-self: start;
+  position: sticky;
+  top: 28px;
+}
+.nav-caption {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tab {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 9px 10px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--soft);
+  border-radius: 3px;
+}
+.tab:hover {
+  background: #f5f2eb;
+  color: var(--ink);
+}
+.tab.active {
+  background: var(--accent-wash);
+  color: var(--accent);
+  font-weight: 600;
+}
+.nav-index {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .03em;
+  color: #8d9389;
+}
+.tab.active .nav-index {
+  color: var(--accent);
+}
+.nav-arrow {
+  margin-left: auto;
+  font-size: 13px;
+  opacity: 0;
+}
+.tab.active .nav-arrow,
+.tab:hover .nav-arrow {
+  opacity: 1;
+}
+.nav-note {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--faint);
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 16px;
+  max-width: 155px;
+}
+.view {
+  min-width: 0;
+  padding-bottom: 24px;
+}
+.view[hidden] {
+  display: none;
+}
+main:focus,
+.view:focus {
+  outline: none;
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr);
+  gap: 30px;
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 17px;
+}
+.section-heading > span {
+  font-size: 9px;
+  color: var(--accent);
+  letter-spacing: .03em;
+}
+.section-heading h2 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+.profile-block p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--soft);
+}
+.profile-block p + p {
+  margin-top: 13px;
+}
+.focus-block {
+  padding: 2px 0 0 18px;
+  border-left: 1px solid var(--line);
+}
+.focus-block > .eyebrow {
+  display: block;
+  font-size: 8px;
+  letter-spacing: .1em;
+  margin-bottom: 13px;
+}
+.focus-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.focus-number {
+  font-size: 8px;
+  color: var(--accent);
+}
+.cv-section {
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 24px;
+}
+.skill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+}
+.skill-group h3 {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.skill-group p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--soft);
+}
+.project-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+  margin-bottom: 13px;
+}
+.project-heading .eyebrow {
+  font-size: 8px;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.project-heading h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 1.3;
+  letter-spacing: -.8px;
+}
+.project-role {
+  font-size: 10px;
+  line-height: 1.65;
+  color: var(--soft);
+  max-width: 158px;
+  text-align: right;
+  padding-top: 4px;
+}
+.project-description {
+  color: var(--soft);
+  font-size: 12px;
+  line-height: 1.9;
+}
+.highlights {
+  margin-top: 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+.highlight {
+  border-left: 2px solid #d7b39b;
+  padding-left: 14px;
+}
+.highlight h4 {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.highlight p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--soft);
+}
+.details-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 19px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: var(--accent);
+  margin-top: 21px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #c39c85;
+}
+.details-link > span {
+  font-size: 16px;
+}
+.experience {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+.experience:first-child {
+  padding-top: 1px;
+}
+.experience:last-child {
+  border: 0;
+  padding-bottom: 0;
+}
+.experience-period {
+  font-size: 10px;
+  color: var(--accent);
+  padding-top: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.experience-context {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--faint);
+  margin-bottom: 3px;
+}
+.experience h3 {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: 22px;
+  letter-spacing: -.35px;
+  line-height: 1.5;
+}
+.experience-content > p:not(.experience-context):not(.experience-stack) {
+  font-size: 12px;
+  color: var(--soft);
+  margin-top: 5px;
+}
+.experience-points {
+  padding-left: 14px;
+  color: var(--soft);
+  font-size: 12px;
+  line-height: 1.85;
+  margin-top: 8px;
+}
+.experience-points li {
+  padding-left: 2px;
+  margin-bottom: 4px;
+}
+.experience-points li::marker {
+  color: #a0ac9f;
+}
+.experience-stack {
+  font-size: 9px;
+  line-height: 1.85;
+  color: var(--faint);
+  margin-top: 10px;
+}
+.education p {
+  font-size: 12px;
+  color: var(--soft);
+}
+.technology-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 19px;
+}
+.technology-header h2 {
+  font-family: var(--serif);
+  font-size: 37px;
+  font-weight: normal;
+  line-height: 1.25;
+  letter-spacing: -1.1px;
+  margin: 8px 0 10px;
+}
+.technology-header > div > p:last-child {
+  font-size: 13px;
+  color: var(--soft);
+  max-width: 510px;
+}
+.topic-count {
+  font-family: var(--serif);
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--accent);
+  padding-top: 10px;
+  text-align: right;
+}
+.topic-count small {
+  display: block;
+  font-family: var(--sans);
+  font-size: 8px;
+  line-height: 1.7;
+  margin-top: 6px;
+  letter-spacing: .03em;
+  color: var(--faint);
+}
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tags li {
+  font-size: 9px;
+  line-height: 1.5;
+  background: #f2f3ec;
+  border: 1px solid #e5e7df;
+  color: #526153;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+.technical-topics {
+  margin-top: 10px;
+}
+.technical-topic {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr);
+  gap: 13px;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--line);
+}
+.technical-topic:last-child {
+  border: 0;
+}
+.topic-number {
+  font-size: 9px;
+  color: var(--accent);
+  padding-top: 5px;
+}
+.technical-topic h3 {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -.25px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.technical-topic p {
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--soft);
+  overflow-wrap: anywhere;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding: 23px 0;
+  margin-top: 26px;
+}
+.footer > span {
+  font-family: var(--serif);
+  font-size: 19px;
+}
+.footer-dot {
+  color: var(--accent);
+}
+.footer p {
+  font-size: 9px;
+  letter-spacing: .03em;
+  color: var(--faint);
+}
+.footer a {
+  margin-left: auto;
+  font-size: 9px;
+  color: var(--soft);
+}
+.js .view:not(.is-active) {
+  display: none;
+}
+@media (min-width: 1600px) {
+  .page-shell {
+    margin: 48px auto;
+  }
+  .hero {
+    padding-top: 58px;
+    padding-bottom: 50px;
+  }
+}
+@media (max-width: 1100px) {
+  .page-shell {
+    width: calc(100% - 40px);
+    padding: 0 35px;
+  }
+  .workspace {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 28px;
+  }
+  .overview-grid {
+    gap: 20px;
+  }
+  .focus-block {
+    padding-left: 14px;
+  }
+  .project-heading {
+    gap: 12px;
+  }
+  .project-heading h3 {
+    font-size: 26px;
+  }
+  .project-role {
+    max-width: 130px;
+  }
+}
+@media (max-width: 800px) {
+  .page-shell {
+    width: calc(100% - 28px);
+    padding: 0 27px;
+    margin: 14px auto;
+  }
+  .hero {
+    padding: 32px 0;
+  }
+  .hero h1 {
+    font-size: 78px;
+  }
+  .hero-note p {
+    font-size: 14px;
+  }
+  .role {
+    font-size: 14px;
+  }
+  .workspace {
+    display: block;
+    padding-top: 22px;
+  }
+  .navigation {
+    position: static;
+    margin-bottom: 28px;
+  }
+  .nav-caption,
+  .nav-note {
+    display: none;
+  }
+  .tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
+  }
+  .tab {
+    font-size: 11px;
+    padding: 7px 9px;
+  }
+  .nav-arrow {
+    display: none;
+  }
+  .nav-index {
+    font-size: 7px;
+  }
+  .technology-header h2 {
+    font-size: 32px;
+  }
+  .footer {
+    margin-top: 15px;
+  }
+}
+@media (max-width: 520px) {
+  .page-shell {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    padding: 0 22px;
+    box-shadow: none;
+  }
+  .masthead {
+    padding: 19px 0;
+    gap: 15px;
+  }
+  .wordmark {
+    font-size: 25px;
+  }
+  .edition {
+    font-size: 8px;
+    letter-spacing: .07em;
+  }
+  .print-button {
+    font-size: 9px;
+    gap: 9px;
+  }
+  .hero {
+    gap: 10px;
+    padding: 28px 0;
+  }
+  .hero .eyebrow {
+    font-size: 8px;
+    letter-spacing: .1em;
+  }
+  .hero h1 {
+    font-size: 68px;
+    letter-spacing: -4px;
+  }
+  .hero-main {
+    min-width: 0;
+  }
+  .role {
+    font-size: 12px;
+    max-width: 250px;
+  }
+  .hero-note {
+    align-self: start;
+    padding-top: 4px;
+  }
+  .hero-note p {
+    display: none;
+  }
+  .draft-mark {
+    font-size: 8px;
+    padding: 3px 6px;
+    gap: 4px;
+  }
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+  .focus-block {
+    border: 0;
+    border-top: 1px solid var(--line);
+    padding: 17px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 15px;
+  }
+  .focus-block > .eyebrow {
+    grid-column: 1/-1;
+    margin-bottom: 6px;
+  }
+  .focus-item {
+    margin: 4px 0;
+    font-size: 11px;
+  }
+  .profile-block p {
+    font-size: 12px;
+  }
+  .tabs {
+    gap: 4px;
+  }
+  .tab {
+    font-size: 10px;
+    gap: 6px;
+    padding: 7px 8px;
+  }
+  .skill-grid {
+    gap: 16px 20px;
+  }
+  .skill-group p {
+    font-size: 10px;
+  }
+  .project-heading {
+    display: block;
+  }
+  .project-heading h3 {
+    font-size: 27px;
+  }
+  .project-role {
+    display: block;
+    max-width: none;
+    text-align: left;
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .project-description,
+  .highlight p {
+    font-size: 12px;
+  }
+  .experience {
+    grid-template-columns: 65px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .experience-period {
+    font-size: 9px;
+  }
+  .experience h3 {
+    font-size: 20px;
+  }
+  .experience-context {
+    font-size: 8px;
+  }
+  .experience-content > p:not(.experience-context):not(.experience-stack),
+  .experience-points {
+    font-size: 11px;
+  }
+  .footer {
+    flex-wrap: wrap;
+    gap: 9px 16px;
+  }
+  .footer p {
+    font-size: 8px;
+    max-width: 210px;
+  }
+  .footer a {
+    font-size: 8px;
+  }
+  .technology-header h2 {
+    font-size: 30px;
+  }
+  .technology-header > div > p:last-child {
+    font-size: 12px;
+  }
+  .topic-count {
+    font-size: 29px;
+  }
+  .technical-topic {
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .technical-topic h3 {
+    font-size: 15px;
+  }
+  .technical-topic p {
+    font-size: 12px;
+  }
+}
+@page {
+  size: A4;
+  margin: 16mm 17mm;
+}
+@media print {
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    background: white;
+    color: #222;
+    font-size: 10pt;
+  }
+  .page-shell {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: white;
+  }
+  .masthead,
+  .navigation,
+  .hero-note,
+  .details-link,
+  .footer,
+  .skip-link {
+    display: none !important;
+  }
+  .hero {
+    padding: 0 0 6mm;
+    border-bottom: 1px solid #ccc;
+    display: block;
+  }
+  .hero h1 {
+    font-size: 41pt;
+    letter-spacing: -2pt;
+    margin: 0;
+  }
+  .hero .eyebrow {
+    font-size: 7pt;
+  }
+  .role {
+    font-size: 12pt;
+  }
+  .workspace {
+    display: block;
+    padding-top: 6mm;
+  }
+  .view {
+    display: block !important;
+    padding: 0;
+  }
+  .js .view {
+    display: none !important;
+  }
+  .js .view.is-active {
+    display: block !important;
+  }
+  .overview-grid {
+    display: block;
+  }
+  .focus-block {
+    display: none;
+  }
+  .profile-block p,
+  .project-description,
+  .highlight p,
+  .experience-content > p:not(.experience-context):not(.experience-stack),
+  .experience-points,
+  .education p {
+    font-size: 9pt;
+    line-height: 1.6;
+  }
+  .section-heading {
+    margin-bottom: 3mm;
+    break-after: avoid;
+  }
+  .section-heading h2 {
+    font-size: 9pt;
+  }
+  .section-heading > span {
+    font-size: 7pt;
+  }
+  .cv-section {
+    padding-top: 5mm;
+    margin-top: 5mm;
+  }
+  .skill-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm 6mm;
+  }
+  .skill-group h3 {
+    font-size: 8pt;
+  }
+  .skill-group p {
+    font-size: 8pt;
+    line-height: 1.6;
+  }
+  .project-heading h3 {
+    font-size: 20pt;
+  }
+  .project-heading .eyebrow {
+    font-size: 6pt;
+  }
+  .project-role {
+    font-size: 8pt;
+  }
+  .highlights {
+    gap: 3mm;
+    margin-top: 4mm;
+  }
+  .highlight {
+    break-inside: avoid;
+    padding-left: 3mm;
+  }
+  .highlight h4 {
+    font-size: 9pt;
+  }
+  .experience {
+    grid-template-columns: 23mm minmax(0, 1fr);
+    gap: 4mm;
+    padding: 4mm 0;
+    break-inside: avoid;
+  }
+  .experience h3 {
+    font-size: 15pt;
+  }
+  .experience-period {
+    font-size: 8pt;
+  }
+  .experience-context {
+    font-size: 7pt;
+  }
+  .experience-stack {
+    font-size: 7pt;
+    margin-top: 2mm;
+  }
+  .technical-topic {
+    break-inside: avoid;
+    padding: 4mm 0;
+    grid-template-columns: 7mm minmax(0, 1fr);
+  }
+  .technical-topic h3 {
+    font-size: 11pt;
+  }
+  .technical-topic p {
+    font-size: 9pt;
+    line-height: 1.65;
+  }
+  .technology-header h2 {
+    font-size: 25pt;
+  }
+  .technology-header > div > p:last-child {
+    font-size: 9pt;
+  }
+  .tags li {
+    font-size: 7pt;
+  }
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+</style></head><body><a href="#content" class="skip-link">К содержимому</a><div class="page-shell"><header class="masthead"><a class="wordmark" href="#overview" data-select="overview">M<span class="wordmark-dot">.</span></a><span class="edition">Анонимизированное CV</span><button class="print-button enhanced-control" type="button" data-print="true"><span>Печать / PDF</span><span aria-hidden="true">↗</span></button></header><div class="hero"><div class="hero-main"><p class="eyebrow">Архитектура систем · Разработка продукта</p><h1>Мария<span class="hero-period">.</span></h1><p class="role">System Architect &amp; Full-stack Engineer</p></div><div class="hero-note"><span class="draft-mark"><span aria-hidden="true"></span>Черновик</span><p>От архитектурного решения<br/>до работающего продукта.</p></div></div><div class="workspace"><nav class="navigation" aria-label="Резюме и технологии"><p class="nav-caption">Содержание</p><div class="tabs"><a href="#overview" id="tab-overview" class="tab active" data-tab="overview"><span class="nav-index">00</span><span>Резюме</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#stripe" class="tab" data-tab="stripe" id="tab-stripe"><span class="nav-index">01</span><span>Stripe</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#postgresql" class="tab" data-tab="postgresql" id="tab-postgresql"><span class="nav-index">02</span><span>PostgreSQL</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#ai" class="tab" data-tab="ai" id="tab-ai"><span class="nav-index">03</span><span>AI / RAG</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#redis" class="tab" data-tab="redis" id="tab-redis"><span class="nav-index">04</span><span>Redis</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#backend" class="tab" data-tab="backend" id="tab-backend"><span class="nav-index">05</span><span>Java / Spring</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#frontend" class="tab" data-tab="frontend" id="tab-frontend"><span class="nav-index">06</span><span>React / Next.js</span><span class="nav-arrow" aria-hidden="true">↗</span></a><a href="#devops" class="tab" data-tab="devops" id="tab-devops"><span class="nav-index">07</span><span>Cloud / CI</span><span class="nav-arrow" aria-hidden="true">↗</span></a></div><p class="nav-note">В этой версии из идентифицирующих данных оставлено только имя. Компании и проекты обозначены по сфере деятельности.</p></nav><main id="content" tabindex="-1"><section id="panel-overview" class="view overview" aria-labelledby="tab-overview" tabindex="-1"><div class="overview-grid"><section class="profile-block" aria-labelledby="profile-heading"><div class="section-heading"><span aria-hidden="true">01</span><h2 id="profile-heading">Профиль</h2></div><p>Проектирую и разрабатываю веб-продукты: от модели данных и платёжной архитектуры до интерфейсов, AI-интеграций и деплоя. Соединяю опыт frontend-разработки на React / Next.js с backend на Java / Spring Boot и Node.js.</p><p>Основные направления — Stripe Connect, транзакционная согласованность, PostgreSQL / pgvector, RAG и event-driven взаимодействие. В опыте — e-commerce, SaaS, билетные системы, логистика и интерфейсы для операционных команд.</p></section><aside class="focus-block" aria-label="Специализация"><span class="eyebrow">Основные направления</span><div class="focus-item"><span class="focus-number">01</span><span>System design</span></div><div class="focus-item"><span class="focus-number">02</span><span>Payments</span></div><div class="focus-item"><span class="focus-number">03</span><span>AI engineering</span></div><div class="focus-item"><span class="focus-number">04</span><span>React / Next.js</span></div></aside></div><section class="cv-section skills-section"><div class="section-heading"><span aria-hidden="true">02</span><h2>Технологии</h2></div><div class="skill-grid"><div class="skill-group"><h3>Backend &amp; payments</h3><p>Java · Spring Boot · Node.js · NestJS · Stripe Connect · REST · GraphQL · SSE · JWT</p></div><div class="skill-group"><h3>Data &amp; AI</h3><p>PostgreSQL · pgvector · Redis · Flyway · RAG · Gemini · OpenAI · Spring AI</p></div><div class="skill-group"><h3>Frontend</h3><p>React · Next.js · TypeScript · TanStack Query · Zustand · Tailwind CSS · Radix UI · Storybook</p></div><div class="skill-group"><h3>Delivery &amp; quality</h3><p>Docker · GitLab CI/CD · DigitalOcean · Testcontainers · WireMock · Vitest · Playwright · Sentry</p></div></div></section><section class="cv-section project-section"><div class="section-heading"><span aria-hidden="true">03</span><h2>Ключевой проект</h2></div><div class="project-heading"><div><p class="eyebrow">Discovery · Ticketing · Communities</p><h3>Платформа мероприятий</h3></div><span class="project-role">Системный архитектор / Full-stack-разработчик</span></div><p class="project-description">End-to-end разработка платформы поиска, создания и продажи мероприятий: архитектура, backend, frontend, модель данных, AI-интеграции и инфраструктура.</p><div class="highlights"><article class="highlight"><h4>Платёжная архитектура Stripe Connect</h4><p>Connected accounts (Express и Standard / Full Dashboard), direct charges и комиссии платформы. Сохранение карты и off-session списание после набора участников; дедупликация webhooks, идемпотентность и компенсационные возвраты.</p></article><article class="highlight"><h4>PostgreSQL, pgvector и Redis</h4><p>Транзакционная модель, row-level / advisory locks и оптимизация SQL / ORM. Semantic search и рекомендации, HNSW (быстрый поиск похожих объектов), геофильтрация и Redis caching с graceful degradation.</p></article><article class="highlight"><h4>RAG и AI data enrichment</h4><p>Retrieval актуальных мероприятий, context engineering и генерация обзоров на Gemini. Batch-пайплайны, локализация на пять языков, structured outputs и проверка результатов; отдельные сценарии enrichment и генерации изображений.</p></article><article class="highlight"><h4>Event-driven и realtime</h4><p>Модульный монолит на Java / Spring Boot, application events и обработчики AFTER_COMMIT. SSE, общая модель чатов, Web Push и управление конкурентными операциями.</p></article><article class="highlight"><h4>Frontend и доставка продукта</h4><p>Next.js / React, BFF, SSR / SSG / ISR, TanStack Query и адресная инвалидация кэша. Контейнеризация, GitLab CI/CD, health-check при деплое и интеграционные проверки.</p></article></div><a class="details-link" href="#stripe" data-select="stripe">Подробнее по технологиям <span aria-hidden="true">↗</span></a></section><section class="cv-section experience-section"><div class="section-heading"><span aria-hidden="true">04</span><h2>Предыдущий опыт</h2></div><div class="experience-list"><article class="experience"><div class="experience-period">2025</div><div class="experience-content"><p class="experience-context">E-commerce · B2B / B2C</p><h3>Full-stack Developer</h3><p>Разработка экосистемы из клиентского, партнёрского и реферального порталов.</p><ul class="experience-points"><li>Каталог, корзина и checkout, скидки, SSO / OTP и ролевой доступ между порталами.</li><li>Платежи и верификация, налоговые формы, электронная подпись документов, аналитические таблицы и графики.</li></ul><p class="experience-stack">Next.js / React / TypeScript / NextAuth / Apollo Client / Stripe / Avalara / SignNow / Twilio</p></div></article><article class="experience"><div class="experience-period">2024–2025</div><div class="experience-content"><p class="experience-context">POS · Операционные интерфейсы</p><h3>Full-stack Developer</h3><p>POS-система с отдельными сценариями клиента, кассира и кухни.</p><ul class="experience-points"><li>Цифровое меню и checkout, очередь заказов, статусы и история операций.</li><li>Realtime-обновления через WebSocket, ролевая модель и аналитика загрузки очереди.</li></ul><p class="experience-stack">Next.js / React / TypeScript / NestJS / TypeORM / PostgreSQL / WebSocket / Docker</p></div></article><article class="experience"><div class="experience-period">2023–2024</div><div class="experience-content"><p class="experience-context">Ticketing · Мероприятия</p><h3>Frontend Developer</h3><p>Веб-приложение бронирования и управления билетами.</p><ul class="experience-points"><li>Поиск, фильтры и infinite scroll; корзина, checkout, перенос и отмена бронирований.</li><li>Личные кабинеты, SSO, realtime-обновления, административный интерфейс и email / SMS-уведомления.</li></ul><p class="experience-stack">Next.js / React / TypeScript / MUI / SCSS / WebSocket / Twilio</p></div></article><article class="experience"><div class="experience-period">2020–2022</div><div class="experience-content"><p class="experience-context">Логистика · Клиентские и внутренние сервисы</p><h3>Frontend Developer</h3><p>Клиентский сервис переноса доставок и инструменты поддержки и администрирования.</p><ul class="experience-points"><li>Пошаговые сценарии выбора времени, проверки адресов и валидации пользовательских данных.</li><li>JWT-аутентификация, ролевой доступ, управление статусами, таблицы, комментарии и аналитические панели.</li></ul><p class="experience-stack">React / TypeScript / Ant Design / SASS / REST API</p></div></article><article class="experience"><div class="experience-period">2018–2019</div><div class="experience-content"><p class="experience-context">E-commerce · Retail</p><h3>Frontend Developer</h3><p>Разработка и поддержка интернет-магазинов одежды, обуви и аксессуаров.</p><ul class="experience-points"><li>Каталог, поиск и фильтры, галереи товаров, корзина, checkout и личные кабинеты.</li><li>Адаптивные интерфейсы, отзывы, рейтинги, рассылки и социальные интеграции.</li></ul><p class="experience-stack">Magento / React / LESS / jQuery</p></div></article><article class="experience"><div class="experience-period">2017–2018</div><div class="experience-content"><p class="experience-context">EdTech · Web games</p><h3>Frontend Developer</h3><p>Образовательная платформа, подписочные лендинги и интерактивные веб-игры.</p><ul class="experience-points"><li>Разработка интерфейсов с нуля, адаптивная вёрстка и API-интеграции.</li><li>Поддержка пользовательских сценариев и UI / UX продукта.</li></ul><p class="experience-stack">JavaScript / jQuery / Webpack / REST API</p></div></article><article class="experience"><div class="experience-period">2014–2017</div><div class="experience-content"><p class="experience-context">Web &amp; mobile</p><h3>UI / UX Designer</h3><p>Проектирование адаптивных интерфейсов, прототипов и дизайн-систем.</p><p class="experience-stack">Figma / Photoshop / InVision</p></div></article></div></section><section class="education cv-section"><div class="section-heading"><span aria-hidden="true">05</span><h2>Образование</h2></div><p>Инженерное высшее образование</p></section></section><section id="panel-stripe" class="view technology-panel" aria-labelledby="tab-stripe" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 01</p><h2>Платёжная архитектура</h2><p>Платежи, комиссии, идемпотентность и согласованность состояний.</p></div><span class="topic-count">05<small>направлений</small></span></header><ul class="tags "><li>Stripe Connect</li><li>Checkout</li><li>PaymentIntents</li><li>Webhooks</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>Stripe Connect</h3><p>Проектирование и реализация платёжной интеграции с connected accounts (Express и Standard / Full Dashboard): onboarding организаторов, синхронизация состояния аккаунтов и готовности к приёму платежей и выплатам. Интеграция Stripe Checkout, SetupIntents и PaymentIntents, direct charges на аккаунты организаторов, комиссии платформы и возвраты. Работа с Accounts v2 notifications и классическими payment webhooks.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">02</span><div><h3>Условная платёжная оркестрация</h3><p>Реализация goal-based payments: сохранение платёжного метода без немедленного списания и последующие off-session платежи после набора необходимого числа участников. Управление дедлайнами, повторными попытками, отменами и выпуском билетов после подтверждения оплаты. Разделение сценариев немедленной оплаты, оплаты после достижения цели, бесплатного участия и внешней оплаты.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">03</span><div><h3>Надёжность платёжных операций</h3><p>Дедупликация webhook-событий по event ID, проверка подписи, идемпотентность платёжных запросов и обработчиков. Проверка суммы и валюты платежей, защита от повторной обработки и конкурентного изменения заказов. Компенсационные сценарии, включая автоматические возвраты запоздалых платежей по отменённым или заменённым Checkout-сессиям.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">04</span><div><h3>Комиссии и билеты</h3><p>Разделение комиссии платформы и фактической комиссии Stripe, асинхронное сохранение данных комиссии после появления balance transaction. Подписанные JWT-билеты для QR-кодов с ревизиями и возможностью отзыва, согласование доступности билетов с состоянием платежа и заказа.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">05</span><div><h3>Монетизация и лимиты</h3><p>Проектирование тарифной модели с ограничениями AI-функций, промокодами и комиссией платформы. Управление квотами на генерации через настройки тарифных планов без изменения прикладного кода.</p></div></article></div></section><section id="panel-postgresql" class="view technology-panel" aria-labelledby="tab-postgresql" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 02</p><h2>Данные и поиск</h2><p>Модель данных, конкурентный доступ, pgvector и геопоиск.</p></div><span class="topic-count">08<small>направлений</small></span></header><ul class="tags "><li>PostgreSQL</li><li>pgvector</li><li>HNSW</li><li>Flyway</li><li>JDBC</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>Модель данных PostgreSQL</h3><p>Проектирование реляционной модели мероприятий, дат проведения, заказов, платежей, билетов, переписок и социальных групп. Использование внешних ключей, CHECK-ограничений, уникальных и частичных индексов для целостности данных. Применение JSONB для структурированных AI-результатов, метаданных и контекста операций, GIN-индексов для коллекций. Выделение схем media и social.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">02</span><div><h3>Управление конкурентностью</h3><p>Применение row-level locking, SELECT FOR UPDATE и PostgreSQL advisory locks для резервирования мест, платёжных переходов, распределения пользователей по группам и операций с переписками. Атомарные upsert через ON CONFLICT, согласованный порядок захвата блокировок и идемпотентная обработка повторных запросов.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">03</span><div><h3>Фоновая обработка на PostgreSQL</h3><p>Использование advisory locks для сериализации тиков платёжного планировщика, lease-механизма для захвата AI-заданий и FOR UPDATE SKIP LOCKED для пакетной очистки архивных данных без ожидания занятых строк. Хранение состояний задач и результатов в БД для продолжения обработки после перезапуска.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">04</span><div><h3>Оптимизация SQL и ORM</h3><p>Использование проекций идентификаторов и загрузки полных сущностей только для итоговой страницы результатов. Устранение N+1 через пакетную загрузку связанных данных, сохранение пагинации на стороне БД вместо пагинации коллекций в памяти. Применение Slice-пагинации без дополнительных COUNT-запросов и ранжирование результатов средствами SQL.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">05</span><div><h3>Геопоиск и карта</h3><p>Реализация поиска по радиусу и границам видимой области: bounding-box prefilter, точная проверка расстояния и сортировка по близости. Серверная grid-кластеризация с учётом масштаба карты и пользовательских фильтров, передача компактных агрегатов вместо полных карточек всех мероприятий. Загрузка для кластеризации только необходимых полей.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">06</span><div><h3>Semantic search на pgvector</h3><p>Построение векторных представлений мероприятий и поисковых запросов через Spring AI EmbeddingModel, хранение в PostgreSQL / pgvector. Ранжирование по смысловой близости с учётом бизнес-фильтров и корректным продолжением порядка результатов между страницами. Использование HNSW (индекс быстрого поиска похожих объектов), версионирование векторов при смене модели, фоновое обновление и backfill отсутствующих представлений.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">07</span><div><h3>Персонализированные рекомендации</h3><p>Разработка многофакторного подбора мероприятий по интересам, желаемому формату участия, социальной атмосфере, дополнительным условиям и географии. Объединение нескольких векторных сигналов, обработка обратной связи, исключение уже показанных событий и резервный подбор при недоступности AI-провайдера.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">08</span><div><h3>Эволюция схемы и доступ к данным</h3><p>Версионирование схемы, индексов, ограничений и прав доступа через Flyway, forward-миграции существующих данных при изменении доменной модели. PostgreSQL RLS и grants для закрытия внутренних таблиц от прямого клиентского доступа. Интеграционные тесты миграций для чистой установки и обновления существующей схемы.</p></div></article></div></section><section id="panel-ai" class="view technology-panel" aria-labelledby="tab-ai" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 03</p><h2>AI engineering</h2><p>Генерация на актуальных данных, enrichment и асинхронные пайплайны.</p></div><span class="topic-count">05<small>направлений</small></span></header><ul class="tags "><li>Gemini</li><li>RAG</li><li>Spring AI</li><li>OpenAI</li><li>Batch inference</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>RAG на Gemini</h3><p>Проектирование и реализация пайплайна retrieval → context engineering → generation для создания обзоров на основе актуальных данных платформы. Выборка мероприятий по городу и периоду, агрегация статистики и формирование контекста с реальными событиями и ссылками. Генерация structured output по JSON Schema с проверкой дат, идентификаторов событий, категорий и разрешённых URL.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">02</span><div><h3>Многоязычная batch-генерация</h3><p>Асинхронная генерация обзоров и локализация на пять языков через двухэтапный Gemini Batch pipeline. Объединение запросов разных городов в общие batch jobs, независимая обработка результатов, восстановление прерванных заданий и доставка изменений статуса пользователю через SSE.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">03</span><div><h3>AI data enrichment</h3><p>Построение асинхронного обогащения импортированных данных с журналированием заданий в PostgreSQL. Использование lease-механизма для захвата задач, стабильных идентификаторов запросов и дедупликации по хешу входных данных. Классификация и нормализация данных по таксономии платформы, проверка актуальности входных данных перед применением результата. Изоляция ошибок AI-обработки от основного импорта.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">04</span><div><h3>AI-автозаполнение и управление промптами</h3><p>Интеграция генерации структурированных карточек мероприятий по пользовательскому описанию, оформления описаний и подписей для социальных публикаций. Редактирование административно управляемых промптов через настройки приложения, история изменений и контроль квот на AI-функции. Валидация структурированных результатов перед использованием в бизнес-сценариях.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">05</span><div><h3>AI image generation</h3><p>Интеграция генерации афиш через OpenAI-compatible Images API на DigitalOcean и административную обработку через OpenAI Batch API. Асинхронные задания с сохранением состояния, пользовательскими квотами, предварительным просмотром и явным принятием результата. Сохранение изображений в медиахранилище и доставка готовых результатов и ошибок через SSE.</p></div></article></div></section><section id="panel-redis" class="view technology-panel" aria-labelledby="tab-redis" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 04</p><h2>Кэширование</h2><p>TTL, версионирование и сохранение доступности при сбоях.</p></div><span class="topic-count">01<small>направлений</small></span></header><ul class="tags "><li>Redis</li><li>Caching</li><li>Graceful degradation</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>Redis caching</h3><p>Разработка стратегии кэширования для сокращения повторных вычислений, задержек и обращений к внешним AI-сервисам. Управление TTL и версионированием кэша, обработка ошибок чтения и записи. Graceful degradation с сохранением работоспособности поиска при недоступности Redis.</p></div></article></div></section><section id="panel-backend" class="view technology-panel" aria-labelledby="tab-backend" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 05</p><h2>Backend и realtime</h2><p>Доменные события, бизнес-процессы, коммуникации и безопасность.</p></div><span class="topic-count">10<small>направлений</small></span></header><ul class="tags "><li>Java</li><li>Spring Boot</li><li>SSE</li><li>Web Push</li><li>S3</li><li>JWT</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>Event-driven архитектура</h3><p>Проектирование модульного монолита на Java / Spring Boot с разделением бизнес-доменов и взаимодействием через типизированные application events. Использование транзакционных обработчиков AFTER_COMMIT для уведомлений, обновления поисковых данных и других асинхронных действий после фиксации изменений. Разделение бизнес-логики, контрактов API, доступа к данным и внешних интеграций.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">02</span><div><h3>Realtime через SSE</h3><p>Реализация доставки изменений заказов, платежей, уведомлений, сообщений и AI-заданий без клиентского polling. Адресная доставка пользователям и участникам комнат, проверка доступа к перепискам и синхронизация клиентского состояния при изменении бизнес-сущностей. На frontend — общий realtime bridge для обновления или инвалидации TanStack Query cache.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">03</span><div><h3>Общая архитектура чатов</h3><p>Разработка conversation-модели для переписок мероприятий и социальных групп с отдельными политиками доступа и миграцией существующих данных. Последовательная нумерация сообщений, курсорная пагинация истории, ответы, реакции и состояние прочтения. Ограничение частоты отправки, сериализация конкурентных изменений и догрузка пропущенных сообщений после восстановления соединения.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">04</span><div><h3>Подбор социальных групп</h3><p>Реализация rule-based matching по городу, ранжированным интересам и языкам общения. Атомарное распределение участников с учётом вместимости, истории членства и повторных запросов. Формирование групповой ленты мероприятий, голосование и управление пересборкой ленты через ревизии состояния.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">05</span><div><h3>Web Push и in-app уведомления</h3><p>Интеграция стандартного Web Push с VAPID, управление подписками нескольких устройств и асинхронная доставка через отдельный executor. Throttling уведомлений, mute-настройки и учёт присутствия пользователя в чате. Автоматическое удаление недействительных подписок и изоляция ошибок доставки на отдельные устройства.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">06</span><div><h3>Медиапайплайн</h3><p>Интеграция S3-compatible storage / DigitalOcean Spaces: прямая загрузка через presigned URLs, проверка объектов и управление жизненным циклом ассетов. Фоновая генерация вариантов изображений и BlurHash-превью, повторное использование медиа и fallback на оригинал при ошибке обработки. Отдача адаптивных вариантов через CDN.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">07</span><div><h3>Автоматизация социальных публикаций</h3><p>Интеграция с Buffer для асинхронной публикации мероприятий и AI-постеров в Instagram. Генерация подписей через LLM, сохранение состояний публикаций и уникальные ключи для защиты от повторного выполнения. Шифрование OAuth-токенов интеграции на уровне приложения.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">08</span><div><h3>BFF и межсервисная аутентификация</h3><p>Разделение браузерной сессии и доступа к backend через Next.js BFF с короткоживущими JWT, подписанными ES256. Проверка подписи, issuer, audience и срока действия на Spring Security Resource Server. Ролевая и объектная авторизация для заказов, мероприятий, административных функций и переписок.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">09</span><div><h3>Идентичность и гостевые сценарии</h3><p>Интеграция Google OAuth, One Tap и magic-link через NextAuth / BFF. Одноразовые magic-link токены, гостевые аккаунты с последующим слиянием данных в зарегистрированный профиль. Разделение публичных и приватных API и согласование настроек доступа с OpenAPI.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">10</span><div><h3>Privacy и retention</h3><p>Реализация удаления пользовательского содержимого переписок, реакций и связанных данных с сохранением истории остальных участников. Журналирование удаления аккаунта, очистка push-подписок и членства в группах, пакетная очистка архивных данных. Версионированные согласия пользователя и отдельный учёт согласий на платежи.</p></div></article></div></section><section id="panel-frontend" class="view technology-panel" aria-labelledby="tab-frontend" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 06</p><h2>Frontend architecture</h2><p>Рендеринг, серверное состояние, производительность и интерфейсы.</p></div><span class="topic-count">06<small>направлений</small></span></header><ul class="tags "><li>React</li><li>Next.js</li><li>TypeScript</li><li>TanStack Query</li><li>PWA</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>Архитектура frontend</h3><p>Разработка Next.js / React приложения в Turborepo-монорепозитории с общими пакетами UI, утилит и конфигурации. Дизайн-система на Radix UI / shadcn с документацией в Storybook. Разделение серверного состояния в TanStack Query, навигационного состояния в URL и локального UI-состояния; типизация API через генерацию TypeScript-контрактов из OpenAPI.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">02</span><div><h3>Рендеринг и кэш Next.js</h3><p>Использование React Server Components и комбинации SSR, SSG и ISR под тип маршрута. Серверное кэширование fetch с тегами и адресная инвалидация после мутаций через BFF. Гидратация серверных данных в TanStack Query без повторной загрузки первой страницы и intercepting routes для открытия карточек поверх ленты с сохранением контекста.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">03</span><div><h3>Frontend performance</h3><p>Анализ Lighthouse и трасс производительности, разбор LCP и TTFB по цепочке браузер → BFF → backend. Ленивая загрузка тяжёлых компонентов и карты, сокращение клиентского payload переводов, оптимизация повторных рендеров, отмена устаревших запросов и использование адаптивных CDN-вариантов изображений.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">04</span><div><h3>Интернационализация и PWA</h3><p>Поддержка пяти локалей через next-intl, работа с часовыми поясами и ICU-плюрализацией. Ограничение клиентских переводов namespace текущего раздела. PWA-манифест, service worker, браузерные push-подписки и адаптивные сценарии карты, лент и чатов.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">05</span><div><h3>SEO / AEO / GEO</h3><p>Серверные metadata, canonical, hreflang, sitemap, robots и структурированные данные JSON-LD для мероприятий, организаторов и контентных страниц. Программные страницы городов и AI-обзоров, llms.txt / llms-full.txt и политики доступа для поисковых и AI-краулеров. Аудиты индексируемости и тесты генераторов SEO-данных.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">06</span><div><h3>Продуктовая аналитика</h3><p>Настройка событий, конверсий и воронок в GA4 и Meta Pixel, Consent Mode и серверная аналитика поисковых запросов. Анализ пользовательских переходов и точек выхода, использование результатов для изменений UX, включая упрощение входа и регистрации.</p></div></article></div></section><section id="panel-devops" class="view technology-panel" aria-labelledby="tab-devops" tabindex="-1"><header class="technology-header"><div><p class="eyebrow">Технический опыт / 07</p><h2>Инфраструктура и качество</h2><p>От сборки и деплоя до наблюдаемости и контрактных проверок.</p></div><span class="topic-count">04<small>направлений</small></span></header><ul class="tags "><li>Docker</li><li>GitLab CI/CD</li><li>DigitalOcean</li><li>Testcontainers</li><li>Sentry</li></ul><div class="technical-topics"><article class="technical-topic"><span class="topic-number" aria-hidden="true">01</span><div><h3>CI/CD и контейнеризация</h3><p>GitLab CI/CD для frontend и backend, Docker multi-stage builds и Buildx с кэшем слоёв в registry. Публикация образов в DigitalOcean Container Registry и деплой целевого сервиса на Droplet через Docker Compose. Проверка готовности контейнера через health-check перед успешным завершением deployment job.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">02</span><div><h3>Инфраструктура и наблюдаемость</h3><p>Размещение сервисов за reverse proxy и BFF, управление конфигурацией и секретами через переменные окружения. Spring Boot Actuator и Micrometer для состояния backend и прикладных метрик поиска и медиапайплайна, Sentry для frontend и сервера Next.js. Идентификация сборки по SHA коммита.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">03</span><div><h3>Интеграционные и контрактные тесты</h3><p>Testcontainers PostgreSQL и WireMock для интеграционных сценариев, тесты конкурентного доступа и миграций. OpenAPI contract / snapshot tests и проверка актуальности генерируемых frontend-типов. Vitest и Playwright для unit- и e2e-проверок, мобильных и кроссбраузерных сценариев.</p></div></article><article class="technical-topic"><span class="topic-number" aria-hidden="true">04</span><div><h3>Архитектурная работа и AI-assisted development</h3><p>Ведение документации бизнес-потоков и интеграций, security review и реестра технического долга. Постановка задач AI-агентам, согласование инженерных правил и критериев готовности, ревью и приёмка результатов параллельных сессий. Управление продуктом от архитектурных решений до выпуска и аналитики.</p></div></article></div></section></main></div><footer class="footer"><span>Мария<span class="footer-dot">.</span></span><p>System architecture · Full-stack development · AI engineering</p><a href="#overview" data-select="overview">Наверх ↑</a></footer></div><script>// Small progressive enhancement: all content is already present in the HTML.
+(() => {
+  const tabs = [...document.querySelectorAll('[data-tab]')];
+  const panels = [...document.querySelectorAll('.view')];
+  const tabList = document.querySelector('.tabs');
+  const knownTabs = new Set(tabs.map(tab => tab.dataset.tab));
+
+  function activate(id, { focus = false, updateHistory = false } = {}) {
+    const selectedId = knownTabs.has(id) ? id : 'overview';
+    tabs.forEach(tab => {
+      const active = tab.dataset.tab === selectedId;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && focus) tab.focus();
+    });
+    panels.forEach(panel => {
+      const active = panel.id === `panel-${selectedId}`;
+      panel.hidden = !active;
+      panel.classList.toggle('is-active', active);
+    });
+    if (updateHistory && location.hash !== `#${selectedId}`) {
+      // Works for an offline file too; no History API dependency.
+      location.hash = selectedId;
+    }
+  }
+
+  tabList.setAttribute('role', 'tablist');
+  tabList.setAttribute('aria-label', document.querySelector('.navigation').getAttribute('aria-label'));
+  tabs.forEach((tab, index) => {
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', `panel-${tab.dataset.tab}`);
+    tab.addEventListener('click', event => {
+      event.preventDefault();
+      activate(tab.dataset.tab, { updateHistory: true });
+    });
+    tab.addEventListener('keydown', event => {
+      let nextIndex;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % tabs.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      activate(tabs[nextIndex].dataset.tab, { focus: true, updateHistory: true });
+    });
+  });
+  panels.forEach(panel => panel.setAttribute('role', 'tabpanel'));
+
+  document.querySelectorAll('[data-select]').forEach(link => link.addEventListener('click', event => {
+    event.preventDefault();
+    activate(link.dataset.select, { updateHistory: true });
+    document.getElementById(`panel-${link.dataset.select}`).focus();
+  }));
+  document.querySelector('[data-print]').addEventListener('click', () => window.print());
+  window.addEventListener('hashchange', () => {
+    const hash = location.hash.slice(1);
+    // Preserve native in-document anchors such as the skip link.
+    if (knownTabs.has(hash) || !hash) activate(hash);
+  });
+  activate(location.hash.slice(1));
+  document.documentElement.classList.add('js');
+})();
+</script></body></html>
